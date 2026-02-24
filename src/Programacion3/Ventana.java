@@ -6,10 +6,13 @@ import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class Ventana extends JFrame{
@@ -17,12 +20,13 @@ public class Ventana extends JFrame{
 	public Ventana () {
 		
 		this.setVisible(true);
-		this.setSize(960,540);
+		this.setSize(1000,540);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension (960, 540));
 		this.setMaximumSize(new Dimension (1920, 1080));
 		this.setTitle("---INICIAR SESIÓN---");
+		this.setLayout(null);
 		//ventana.setBackground(Color.black);
 		
 		JPanel contenedor = new JPanel();
@@ -37,8 +41,8 @@ public class Ventana extends JFrame{
 		title_login.setText("INICIAR SESIÓN ");
 		title_login.setSize(275,30);
 		title_login.setOpaque(true);
-		title_login.setLocation(150,10);
-		title_login.setBackground(Color.white);
+		title_login.setLocation(150,30);
+		title_login.setBackground(Color.gray);
 		title_login.setFont(new Font ("Arial",Font.BOLD,22));
 		title_login.setHorizontalAlignment(JLabel.CENTER);
 		contenedor.add(title_login);
@@ -103,6 +107,65 @@ public class Ventana extends JFrame{
 	
 		contenedor.repaint();
 		contenedor.revalidate();
+		
+		JPanel register = new JPanel();
+		register.setSize(500,500);
+		register.setLocation(650,50);
+		register.setOpaque(true);
+		register.setForeground(Color.black);
+		register.setLayout(null);
+		this.add(register);
+
+		JLabel bio = new JLabel(" BIOGRAFIA ");
+		bio.setBounds(0, 0, 250, 40);
+		bio.setBackground(Color.white);
+		bio.setHorizontalAlignment(JLabel.CENTER);
+		bio.setOpaque(true);
+		bio.setFont(new Font ("Arial",Font.BOLD,22));
+		register.add(bio);
+		
+		JTextArea bio_dos = new JTextArea();
+		bio_dos.setBackground(Color.black);
+		bio_dos.setForeground(Color.white);
+		bio_dos.setFont(new Font ("Arial",Font.BOLD,10));
+		bio_dos.setBounds(10, 100, 250, 100);
+		register.add(bio_dos);
+		
+		JCheckBox sweet = new JCheckBox("DULCE ");
+		sweet.setBounds(10, 200, 90, 40);
+		sweet.setFont(new Font ("Arial",Font.BOLD,10));
+		register.add(sweet);
+		
+		JCheckBox salty = new JCheckBox("SALADO ");
+		salty.setBounds(105, 200, 90, 40);
+		salty.setFont(new Font ("Arial",Font.BOLD,10));
+		register.add(salty);
+		
+		JCheckBox healthy = new JCheckBox("SALUDABLE ");
+		healthy.setBounds(200, 200, 90, 40);
+		healthy.setFont(new Font ("Arial",Font.BOLD,10));
+		register.add(healthy);
+		
+		JRadioButton opc1 = new JRadioButton("Acepto los terminos.");
+		opc1.setBounds(0, 240, 150, 40);
+		opc1.setFont(new Font ("Arial",Font.BOLD,10));
+		register.add(opc1);
+		
+		JRadioButton opc2 = new JRadioButton("Rechazo los terminos.");
+		opc2.setBounds(150, 240, 150, 40);
+		opc2.setFont(new Font ("Arial",Font.BOLD,10));
+		register.add(opc2);
+	
+		
+		JComboBox colonia = new JComboBox();
+
+
+		register.repaint();
+		
+
+
+		
+
 			
 	}
 }
