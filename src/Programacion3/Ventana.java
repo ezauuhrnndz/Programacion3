@@ -11,9 +11,13 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -32,7 +36,39 @@ public class Ventana extends JFrame {
         
         //this.login();
         //this.registro();
-        this.users();
+        
+
+		JMenuBar barra = new JMenuBar();
+		
+		JMenu archivo = new JMenu("Archivo");
+		
+		JMenuItem open = new JMenuItem("Abrir");
+		JMenuItem close = new JMenuItem("Cerrar");
+		JMenuItem save = new JMenuItem("Guardar");
+		JMenuItem newFile  = new JMenuItem("Nuevo");
+		
+		archivo.add(open);
+		archivo.add(close);
+		archivo.add(save);
+		archivo.add(newFile);
+		
+		barra.add(archivo);
+		
+		JMenu submenu = new JMenu("Otros");
+		
+		archivo.addSeparator();
+		
+		JMenuItem menuItem = new JMenuItem("Hola");
+
+		submenu.add(menuItem);
+		archivo.add(submenu);
+		
+		this.setJMenuBar(barra);
+		
+		this.users();
+		
+
+		
         
     }
     public void login() {
@@ -169,46 +205,58 @@ public class Ventana extends JFrame {
 	public void users() {
 		
 		JPanel users = new JPanel();
-		users.setSize(800,400);
-		users.setLocation(100,50);
+		users.setSize(1000, 500);
+		users.setLocation(100, 50);
 		users.setBackground(Color.white);
+		users.setLayout(null);
 		this.add(users);
 		
-		JLabel usuarios = new JLabel("USUARIOS");
-		usuarios.setBounds(110,500,200,40);
-		usuarios.setHorizontalAlignment(JLabel.CENTER);
-		usuarios.setOpaque(true);
-        usuarios.setLayout(null);
-		usuarios.setBackground(Color.white);
-		usuarios.setFont(new Font("Segoe UI", Font.BOLD, 24));
-		users.add(usuarios);
+		JLabel users_title = new JLabel("USUARIOS");
+		users_title.setBounds(400, 30, 200, 40);
+		users_title.setHorizontalAlignment(JLabel.CENTER);
+		users_title.setOpaque(true);
+		users_title.setFont(new Font("Arial",Font.BOLD,22));
+		users_title.setBackground(Color.decode("#F27A61"));
+		users.add(users_title);
 		
 		JButton export = new JButton("Exportar");
-		export.setBounds(150, 120, 100, 40);
-		users.add(export);		
+		export.setBounds(30, 120, 100, 40);
+		users.add(export);
 		
 		JButton add = new JButton("Añadir");
 		add.setBounds(130, 120, 100, 40);
 		users.add(add);
 		
-		String [] tabla = {"No. de Control", "Nombre", "Apellidos", "Semestre", "Promedio", "Acciones"};		
+		Object[] table_head = {"No. control","Nombre","Apellidos","Semestre","Promedio","Acciones"};
 		
-		String [][] tablaDos = {
-				    {"2023001", "Juan", "Pérez López", "6", "8.9", "Editar/Eliminar"},
-				    {"2023002", "María", "García Hernández", "4", "9.2", "Editar/Eliminar"},
-				    {"2023003", "Carlos", "Martínez Sánchez", "8", "7.5", "Editar/Eliminar"},
-				    {"2023004", "Ana", "Rodríguez Gómez", "2", "9.8", "Editar/Eliminar"}
-
+		Object [][] table_content = {
+		    {"20231001","Juan","Pérez García","3","8.7","Editar"},
+		    {"20231002","María","López Hernández","5","9.2","Editar"},
+		    {"20231003","Carlos","Ramírez Torres","2","7.9","Editar"},
+		    {"20231004","Ana","Gómez Sánchez","6","9.5","Editar"},
+		    {"20231001","Juan","Pérez García","3","8.7","Editar"},
+		    {"20231002","María","López Hernández","5","9.2","Editar"},
+		    {"20231003","Carlos","Ramírez Torres","2","7.9","Editar"},
+		    {"20231004","Ana","Gómez Sánchez","6","9.5","Editar"},
+		    {"20231001","Juan","Pérez García","3","8.7","Editar"},
+		    {"20231002","María","López Hernández","5","9.2","Editar"},
+		    {"20231003","Carlos","Ramírez Torres","2","7.9","Editar"},
+		    {"20231004","Ana","Gómez Sánchez","6","9.5","Editar"},
+		    {"20231001","Juan","Pérez García","3","8.7","Editar"},
+		    {"20231002","María","López Hernández","5","9.2","Editar"},
+		    {"20231003","Carlos","Ramírez Torres","2","7.9","Editar"},
+		    {"20231004","Ana","Gómez Sánchez","6","9.5","Editar"}
 		};
 		
-		JTable usuariosTabla = new JTable(tablaDos, tabla );
-		usuarios.setLocation(10,300);
-		usuarios.setSize(100,80);
-		users.add(usuariosTabla);
+		JTable users_table = new JTable(table_content,table_head);
+		JScrollPane scrollPane = new JScrollPane(users_table);
 		
-        this.setVisible(true);
-        users.repaint();	
+		scrollPane.setLocation(30, 180); 
+		scrollPane.setSize(800, 100);
 		
+		
+		users.add(scrollPane);
+			
 	}
 
 }
