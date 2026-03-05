@@ -1,4 +1,4 @@
-package Calculadora;
+package CalculadoraLayout;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,34 +13,77 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class Calculadora extends JFrame {
+public class CalculadoraLayout extends JFrame {
+	
+    private JButton b1,b2,b3,b4;
 
-    public Calculadora() {
+    public CalculadoraLayout() {
         this.setTitle("CALCULADORA - INTERFAZ");
         this.setSize(340, 500);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        this.setLayout(null);
+        this.setLayout(new BorderLayout());
         this.getContentPane().setBackground(new Color(245, 245, 245));
 
         JPanel contenedor = new JPanel();
-        contenedor.setBounds(0, 0, 800, 600);
         contenedor.setBackground(Color.WHITE);
-        contenedor.setLayout(null);
+        contenedor.setLayout(new BorderLayout());
         contenedor.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220)));
         this.add(contenedor);
+        
+        JPanel panelSuperior = new JPanel();
+        panelSuperior.setLayout(new BorderLayout());
 
         JLabel lblResultado = new JLabel("0", SwingConstants.RIGHT);
-        lblResultado.setBounds(20, 20, 285, 60);
         lblResultado.setOpaque(true);
         lblResultado.setBackground(new Color(250, 250, 250));
         lblResultado.setFont(new Font("Segoe UI", Font.BOLD, 32));
         lblResultado.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(200, 200, 200)),
             BorderFactory.createEmptyBorder(0, 0, 0, 15)));
-        contenedor.add(lblResultado);
 
-        JButton btnClear = crearBoton("C", 20, 100);
+        panelSuperior.add(lblResultado, BorderLayout.NORTH);
+
+        contenedor.add(panelSuperior, BorderLayout.NORTH);
+
+        unaVentana(panelSuperior);
+        
+        JPanel panelBotones = new JPanel();
+        panelBotones.setLayout(new GridLayout(4,4,5,5));
+
+        String[] botones = {
+                "7","8","9","/",
+                "6","5","4","*",
+                "3","2","1","-",
+                "0",".","=","+"
+        };
+
+        for(String texto : botones){
+            panelBotones.add(new JButton(texto));
+            
+        }
+        contenedor.add(panelBotones, BorderLayout.CENTER);
+        this.setVisible(true);
+
+    }
+    public void unaVentana(JPanel contenedor) {
+    	
+	    b1 = new JButton("CE");
+	    b2 = new JButton("MC");
+	    b3 = new JButton("M+");
+	    b4 = new JButton("Historial");
+	
+	    JPanel panelMemoria = new JPanel();
+    	panelMemoria.setLayout(new GridLayout(1,4,5,5));
+    	
+    	panelMemoria.add(b1);
+    	panelMemoria.add(b2);
+    	panelMemoria.add(b3);
+    	panelMemoria.add(b4);
+    	
+    	contenedor.add(panelMemoria,BorderLayout.SOUTH);
+
+        /*JButton btnClear = crearBoton("C", 20, 100);
         btnClear.setBackground(new Color(231, 76, 60)); 
         contenedor.add(btnClear);
 
@@ -93,25 +136,23 @@ public class Calculadora extends JFrame {
         btn0.setSize(210, 60); 
         contenedor.add(btn0);
         
-        JPanel test_panel = new JPanel();
+       /* JPanel test_panel = new JPanel();
 		test_panel.setSize(400, 450);
 		test_panel.setLocation(0, 0);
 		test_panel.setBackground(Color.white);
 		test_panel.setLayout(null);
-		this.add(test_panel);
+		this.add(test_panel, BorderLayout.SOUTH);
         
         JPanel center_panel = new JPanel(); 
 		center_panel.setBackground(Color.WHITE);
 		center_panel.setLayout(new GridLayout(4,4));
-		
-		center_panel.add(new JButton("1"));
-		
+				
 		contenedor.add(center_panel,BorderLayout.CENTER);
 
-        this.setVisible(true);
+        this.setVisible(true);*/
     }
 
-    private JButton crearBoton(String texto, int x, int y) {
+   /* private JButton crearBoton(String texto, int x, int y) {
         JButton boton = new JButton(texto);
         boton.setBounds(x, y, 60, 60);
         boton.setFont(new Font("Segoe UI", Font.BOLD, 18));
@@ -120,6 +161,5 @@ public class Calculadora extends JFrame {
         boton.setFocusPainted(false);
         boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         boton.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200)));
-        return boton;
-    }
+        return boton;*/
 }
