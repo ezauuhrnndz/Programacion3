@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Image;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -20,10 +21,12 @@ import javax.swing.ImageIcon;
 public class VentanaLogin extends JFrame {
 	
 	public VentanaLogin() {
+        // Configuracion basica de la ventana: titulo, tamaño y que se cierre al salir
+		this.setIconImage(new ImageIcon("logo.png").getImage());
         this.setTitle("---INICIAR SESION---");
         this.setSize(1000, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null); // Centra la ventana en la pantalla
         this.setLayout(null); 
         this.login();
         this.setVisible(true);
@@ -31,6 +34,7 @@ public class VentanaLogin extends JFrame {
 	
 	public void login() {
         
+        // Panel de la izquierda para poner el logo o una imagen de bienvenida
         JPanel contenedorLogo = new JPanel();
         contenedorLogo.setBounds(50, 40, 502, 480);
         contenedorLogo.setBackground(Color.white);
@@ -46,6 +50,7 @@ public class VentanaLogin extends JFrame {
         textoLogo.setFont(new Font("Segoe UI", Font.BOLD, 16));
         contenedorLogo.add(textoLogo);
 
+        // Panel de la derecha donde van todos los campos del formulario
    	 	JPanel contenedor = new JPanel();
         contenedor.setBounds(550, 40, 400, 480);
         contenedor.setBackground(Color.white);
@@ -58,6 +63,7 @@ public class VentanaLogin extends JFrame {
         title_login.setFont(new Font("Segoe UI", Font.BOLD, 24));
         contenedor.add(title_login);
         
+        // Campo para el nombre de usuario con su icono
         ImageIcon iconoUsuario = new ImageIcon("usuario.png");
 
         JLabel user = new JLabel("NOMBRE DE USUARIO:");
@@ -69,11 +75,13 @@ public class VentanaLogin extends JFrame {
 
         JTextField username = new JTextField();
         username.setBounds(50, 155, 300, 35);
+        // El compound border es para que el texto no pegue con el borde del cuadro
         username.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(200, 200, 200)),
             BorderFactory.createEmptyBorder(0, 10, 0, 0)));
         contenedor.add(username);
 
+        // Campo para la contraseña
         ImageIcon iconoContraseña = new ImageIcon("PasswordIcon.png");
         
         JLabel pass = new JLabel("CONTRASEÑA:");
@@ -90,6 +98,7 @@ public class VentanaLogin extends JFrame {
             BorderFactory.createEmptyBorder(0, 10, 0, 0)));
         contenedor.add(password);
 
+        // Opciones extras: check de recordar y el link de recuperar pass
         JCheckBox recordar = new JCheckBox("Recordarme");
         recordar.setBounds(50, 275, 120, 20);
         recordar.setBackground(Color.WHITE);
@@ -105,6 +114,7 @@ public class VentanaLogin extends JFrame {
         ask.setCursor(new Cursor(Cursor.HAND_CURSOR));
         contenedor.add(ask);
         
+        // Colores para el efecto hover del boton
         final Color colorNaranjaOriginal = Color.decode("#DE6A00");
         final Color colorNaranjaHover = Color.decode("#FF8C00");
         
@@ -117,6 +127,7 @@ public class VentanaLogin extends JFrame {
         acceder.setBorder(null);
         acceder.setCursor(new Cursor(Cursor.HAND_CURSOR));  
         
+        // Listener para que cambie de color cuando el mouse pase por encima
         acceder.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -131,6 +142,7 @@ public class VentanaLogin extends JFrame {
         
         contenedor.add(acceder);
         
+        // Imagen de fondo que cubre toda la ventana
         JLabel fondo = new JLabel(new ImageIcon("DiseñoLogin.jpg"));	
         fondo.setBounds(0, 0, 1000, 600);
         this.add(fondo);
