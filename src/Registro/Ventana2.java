@@ -9,6 +9,8 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
+
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
@@ -46,7 +48,8 @@ public class Ventana2 {
 	}
 
 	public Ventana2() {
-		initialize();
+		//initialize();
+		pintar();
 	}
 
 	private void initialize() {
@@ -216,22 +219,29 @@ public class Ventana2 {
 			}
 		});
 		
-		JLabel lblNuevoIcono = new JLabel("");
+		JLabel lblNuevoIcono = new JLabel("Nuevo");
 		lblNuevoIcono.setIcon(new ImageIcon(Ventana2.class.getResource("/SignUp/NuevoIcono.png")));
 		lblNuevoIcono.setBounds(100, 400, 50, 50);
 		panel_3_2_1.add(lblNuevoIcono);
 		
 		JButton btnGuardar = new JButton("Guardar");
 		
-		JLabel lblGuardar = new JLabel("");
+		JLabel lblGuardar = new JLabel("Guardar");
 		lblGuardar.setIcon(new ImageIcon(Ventana2.class.getResource("/SignUp/Guardar.png")));
 		lblGuardar.setBounds(100, 400, 50, 50);
 		panel_3_2_1.add(lblGuardar);
 		
 		JButton btnSalir = new JButton("Salir");
+		
+		JLabel lblSalir = new JLabel("Salir");
+		lblSalir.setIcon(new ImageIcon(Ventana2.class.getResource("/SignUp/cerrar-sesion.png")));
+		lblSalir.setBounds(100, 400, 50, 50);
+		panel_3_2_1.add(lblSalir);
 
-		panel_3_2_1.add(btnNuevo);
-		panel_3_2_1.add(btnGuardar);
-		panel_3_2_1.add(btnSalir);
+		//panel_3_2_1.add(btnNuevo);
+		//panel_3_2_1.add(btnGuardar);
+		//panel_3_2_1.add(btnSalir);
 	}
+	
+	
 }
