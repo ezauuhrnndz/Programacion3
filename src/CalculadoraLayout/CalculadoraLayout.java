@@ -207,7 +207,7 @@ public class CalculadoraLayout extends JFrame {
 		contenedor.add(center_panel,BorderLayout.CENTER);
 
         this.setVisible(true);*/
-    }
+   
 
    /* private JButton crearBoton(String texto, int x, int y) {
         JButton boton = new JButton(texto);
