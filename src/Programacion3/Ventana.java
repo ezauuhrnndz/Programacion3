@@ -177,6 +177,12 @@ public class Ventana extends JFrame {
                      System.out.println("Login correcto");
                  }
                  
+                 if (todoBien = true) {
+                	 JOptionPane.showConfirmDialog(null, "Bienvenido");
+                	 
+                 }else {
+                	 JOptionPane.showConfirmDialog(null, "Error");
+                 }
 
              }
          });
