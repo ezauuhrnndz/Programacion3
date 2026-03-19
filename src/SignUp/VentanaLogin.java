@@ -3,6 +3,8 @@ package SignUp;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Image;
@@ -80,7 +82,7 @@ public class VentanaLogin extends JFrame {
             BorderFactory.createLineBorder(new Color(200, 200, 200)),
             BorderFactory.createEmptyBorder(0, 10, 0, 0)));
         contenedor.add(username);
-
+        
         // Campo para la contraseña
         ImageIcon iconoContraseña = new ImageIcon("PasswordIcon.png");
         
@@ -125,7 +127,54 @@ public class VentanaLogin extends JFrame {
         acceder.setFont(new Font("Segoe UI", Font.BOLD, 16));
         acceder.setFocusPainted(false);
         acceder.setBorder(null);
-        acceder.setCursor(new Cursor(Cursor.HAND_CURSOR));  
+        acceder.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
+        
+        acceder.addActionListener(new ActionListener() {
+
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        	    String username_val = username.getText();
+        	    String password_val = new String(password.getPassword());
+        	    
+        	    boolean todoBien = true;
+
+        	    // Validacion de user
+        	    if (username_val.equals("") || username_val.contains(" ")){
+        	        username.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+        	        todoBien = false;
+        	    }else {
+        	        username.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+        	    }
+
+        	    // Validacion dde pass
+        	    if (password_val.length() < 6 || password_val.contains(" ")){
+        	        password.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+        	            todoBien = false;
+        	    }else{
+        	        password.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+        	    }
+
+        	    // VALIDACION "TERMINOS" (uso tu checkbox)
+        	    if (!recordar.isSelected()){
+        	        recordar.setForeground(Color.red);
+        	        todoBien = false;
+        	    }else{
+        	        recordar.setForeground(Color.black);
+        	    }
+
+        	    // RESULTADO FINAL
+        	    if (todoBien){
+        	        System.out.println("Registro correcto");
+        	    }
+
+        	}
+
+        		
+        	
+					
+        }
+				);
+
         
         // Listener para que cambie de color cuando el mouse pase por encima
         acceder.addMouseListener(new MouseAdapter() {

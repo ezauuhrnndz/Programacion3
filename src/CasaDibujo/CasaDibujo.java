@@ -110,20 +110,20 @@ public class CasaDibujo extends JFrame{
 //					Faro
 	                
                     g2d.setColor(Color.decode("#45556C"));
-	                g2d.fillRect(850,180,10,320);
+	                g2d.fillRect(900,180,10,320);
 	                
 	                g2d.setColor(Color.decode("#45556C"));
-	                g2d.fillRect(760,180,100,10);
+	                g2d.fillRect(810,180,100,10);
 	                
 	                g2d.setColor(Color.decode("#45556C"));
-	                g2d.fillRect(760,180,10,30);
+	                g2d.fillRect(810,180,10,30);
 	                
 	                // Luz
 	                g2d.setColor(Color.decode("#FFEB3B"));
-	                g2d.fillOval(750, 210, 30, 30);
+	                g2d.fillOval(800, 210, 30, 30);
 	                
 	                g2d.setColor(Color.decode("#45556C"));
-	                g2d.fillRect(750,210,30,20);
+	                g2d.fillRect(800,210,30,20);
 	                
 	                    
 	                

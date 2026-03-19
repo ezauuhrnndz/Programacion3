@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -42,9 +45,9 @@ public class Ventana extends JFrame {
         this.getContentPane().setBackground(Color.decode("#FDEBD0"));
         this.setVisible(true);
         
-        //this.login();
-        //this.registro();
-        this.pintar();
+        this.login();
+        this.registro();
+        
         
 
 		JMenuBar barra = new JMenuBar();
@@ -139,10 +142,51 @@ public class Ventana extends JFrame {
          acceder.setFont(new Font("Segoe UI", Font.BOLD, 16));
          acceder.setFocusPainted(false);
          acceder.setBorder(null);
+
+         acceder.addActionListener(new ActionListener() {
+
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 String username_val = username.getText();
+                 String password_val = new String(password.getPassword());
+                 
+                 boolean todoBien = true;
+
+                 if (username_val.equals("") || username_val.contains(" ")){
+                     username.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+                     todoBien = false;
+                 }else {
+                     username.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+                 }
+
+                 if (password_val.length() < 6 || password_val.contains(" ")){
+                     password.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+                         todoBien = false;
+                 }else{
+                     password.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+                 }
+
+                 if (!recordar.isSelected()){
+                     recordar.setForeground(Color.red);
+                     todoBien = false;
+                 }else{
+                     recordar.setForeground(Color.black);
+                 }
+
+                 if (todoBien){
+                     System.out.println("Login correcto");
+                 }
+                 
+
+             }
+         });
+         
          contenedor.add(acceder);
+         
+         contenedor.repaint();
 	}
-	public void registro(){
-		JPanel register = new JPanel();
+    public void registro(){
+        JPanel register = new JPanel();
         register.setBounds(500, 40, 430, 480);
         register.setBackground(Color.WHITE); 
         register.setLayout(null);
@@ -189,9 +233,11 @@ public class Ventana extends JFrame {
         JRadioButton opc1 = new JRadioButton("Acepto terminos");
         opc1.setBounds(30, 290, 150, 25);
         opc1.setBackground(Color.WHITE);
+
         JRadioButton opc2 = new JRadioButton("Rechazo terminos");
         opc2.setBounds(180, 290, 150, 25);
         opc2.setBackground(Color.WHITE);
+
         terminos.add(opc1);
         terminos.add(opc2);
         register.add(opc1);
@@ -207,10 +253,55 @@ public class Ventana extends JFrame {
         JComboBox colonia = new JComboBox(colonias);
         colonia.setBounds(30, 360, 370, 30);
         register.add(colonia);
-        
+
+        // BOTON REGISTRAR
+        JButton registrar = new JButton("REGISTRAR");
+        registrar.setBounds(30, 410, 370, 40);
+        registrar.setBackground(Color.decode("#7E5109"));
+        registrar.setForeground(Color.WHITE);
+        register.add(registrar);
+
+        registrar.addActionListener(e -> {
+
+            String bio_texto = bio_dos.getText();
+            boolean todoBien = true;
+
+            if (!bio_texto.equals("") && bio_texto.length() < 5){
+                bio_dos.setBorder(BorderFactory.createLineBorder(Color.red,2));
+                todoBien = false;
+            }else{
+                bio_dos.setBorder(BorderFactory.createLineBorder(Color.green,2));
+            }
+
+            if (!sweet.isSelected() && !salty.isSelected() && !healthy.isSelected()){
+                gustos.setForeground(Color.red);
+                todoBien = false;
+            }else{
+                gustos.setForeground(Color.black);
+            }
+
+            if (!opc1.isSelected()){
+                opc1.setForeground(Color.red);
+                    todoBien = false;
+            }else{
+                opc1.setForeground(Color.black);
+            }
+
+            if (colonia.getSelectedIndex() == 0){
+                colonia.setBorder(BorderFactory.createLineBorder(Color.red,2));
+                todoBien = false;
+            }else{
+                colonia.setBorder(BorderFactory.createLineBorder(Color.green,2));
+            }
+
+            if (todoBien){
+                System.out.println("Registro correcto");
+            }
+
+        });
+
         register.repaint();
-			
-	}
+    }
 	public void users() {
 		
 		JPanel users = new JPanel();

@@ -48,8 +48,7 @@ public class Ventana2 {
 	}
 
 	public Ventana2() {
-		//initialize();
-		pintar();
+		initialize();
 	}
 
 	private void initialize() {
@@ -238,10 +237,8 @@ public class Ventana2 {
 		lblSalir.setBounds(100, 400, 50, 50);
 		panel_3_2_1.add(lblSalir);
 
-		//panel_3_2_1.add(btnNuevo);
-		//panel_3_2_1.add(btnGuardar);
-		//panel_3_2_1.add(btnSalir);
+		panel_3_2_1.add(btnNuevo);
+		panel_3_2_1.add(btnGuardar);
+		panel_3_2_1.add(btnSalir);
 	}
-	
-	
 }
