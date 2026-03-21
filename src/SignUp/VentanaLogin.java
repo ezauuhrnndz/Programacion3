@@ -10,12 +10,19 @@ import java.awt.event.MouseEvent;
 import java.awt.Image;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
@@ -32,6 +39,50 @@ public class VentanaLogin extends JFrame {
         this.setLayout(null); 
         this.login();
         this.setVisible(true);
+        
+        JMenuBar barra = new JMenuBar();
+		
+		JMenu archivo = new JMenu("Archivo");
+		
+		JMenuItem open = new JMenuItem("Abrir");
+		JMenuItem close = new JMenuItem("Cerrar");
+		JMenuItem save = new JMenuItem("Guardar");
+		JMenuItem newFile = new JMenuItem("Nuevo");
+		
+		archivo.add(open);
+		archivo.add(close);
+		archivo.add(save);
+		archivo.add(newFile);
+		
+		barra.add(archivo);
+		
+		JMenu submenu = new JMenu("Otros");
+		
+		archivo.addSeparator(); 
+
+		JMenuItem menuItem = new JMenuItem("An item in the submenu");
+		 
+		submenu.add(menuItem);
+
+		menuItem = new JMenuItem("Another item");
+		submenu.add(menuItem);
+		archivo.add(submenu);
+		
+		JMenu ayuda = new JMenu("Ayuda");
+		barra.add(ayuda);
+		
+		JMenu cuenta = new JMenu("Cuenta");
+		JMenuItem acceder = new JMenuItem("Acceder");
+		JMenuItem registrarse = new JMenuItem("Registrarse");
+		
+		cuenta.add(acceder);
+		cuenta.add(registrarse);
+		
+		barra.add(cuenta);
+		
+		this.setJMenuBar(barra);
+		
+		this.setVisible(true);
 	}
 	
 	public void login() {
@@ -60,7 +111,7 @@ public class VentanaLogin extends JFrame {
         contenedor.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220)));
         this.add(contenedor);
         
-        JLabel title_login = new JLabel(" SIGN UP ", SwingConstants.CENTER);
+        JLabel title_login = new JLabel(" USER LOGIN ", SwingConstants.CENTER);
         title_login.setBounds(50, 40, 300, 40);
         title_login.setFont(new Font("Segoe UI", Font.BOLD, 24));
         contenedor.add(title_login);
@@ -68,7 +119,7 @@ public class VentanaLogin extends JFrame {
         // Campo para el nombre de usuario con su icono
         ImageIcon iconoUsuario = new ImageIcon("usuario.png");
 
-        JLabel user = new JLabel("NOMBRE DE USUARIO:");
+        JLabel user = new JLabel("USERNAME OR EMAIL:");
         user.setIcon(iconoUsuario); 
         user.setBounds(50, 130, 300, 20);
         user.setFont(new Font("Segoe UI", Font.BOLD, 12));
@@ -86,7 +137,7 @@ public class VentanaLogin extends JFrame {
         // Campo para la contraseña
         ImageIcon iconoContraseña = new ImageIcon("PasswordIcon.png");
         
-        JLabel pass = new JLabel("CONTRASEÑA:");
+        JLabel pass = new JLabel("PASSWORD:");
         pass.setIcon(iconoContraseña); 
         pass.setBounds(50, 205, 300, 20);
         pass.setIconTextGap(15);
@@ -101,14 +152,14 @@ public class VentanaLogin extends JFrame {
         contenedor.add(password);
 
         // Opciones extras: check de recordar y el link de recuperar pass
-        JCheckBox recordar = new JCheckBox("Recordarme");
+        JCheckBox recordar = new JCheckBox("Remember Me");
         recordar.setBounds(50, 275, 120, 20);
         recordar.setBackground(Color.WHITE);
         recordar.setFont(new Font("Segoe UI", Font.ITALIC, 11));
         contenedor.add(recordar);
 
-        JButton ask = new JButton("¿Olvido su contraseña?");
-        ask.setBounds(215, 275, 150, 20);
+        JButton ask = new JButton("¿Forgot Password?");
+        ask.setBounds(230, 375, 150, 20);
         ask.setFont(new Font("Segoe UI", Font.ITALIC, 11));
         ask.setForeground(Color.decode("#DE6A00"));
         ask.setBorderPainted(false);
@@ -120,8 +171,26 @@ public class VentanaLogin extends JFrame {
         final Color colorNaranjaOriginal = Color.decode("#DE6A00");
         final Color colorNaranjaHover = Color.decode("#FF8C00");
         
-        JButton acceder = new JButton("ACCEDER");
-        acceder.setBounds(50, 350, 300, 45);
+        JButton register = new JButton ("New User? Signup");  
+        register.setBounds(20, 375, 150, 20);
+        register.setFont(new Font("Segoe UI", Font.ITALIC, 11));
+        register.setForeground(Color.decode("#DE6A00"));
+        register.setBorderPainted(false);
+        register.setContentAreaFilled(false);
+        register.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        contenedor.add(register);
+        
+        register.addActionListener(e -> {
+			
+			this.router("registro");
+		});
+		
+		
+		contenedor.repaint();
+		contenedor.revalidate();
+		
+        JButton acceder = new JButton("LOGIN");
+        acceder.setBounds(50, 320, 300, 45);
         acceder.setBackground(colorNaranjaOriginal);
         acceder.setForeground(Color.WHITE);
         acceder.setFont(new Font("Segoe UI", Font.BOLD, 16));
@@ -195,5 +264,121 @@ public class VentanaLogin extends JFrame {
         JLabel fondo = new JLabel(new ImageIcon("DiseñoLogin.jpg"));	
         fondo.setBounds(0, 0, 1000, 600);
         this.add(fondo);
-    }
+	}
+	
+	public void registro()
+	{
+		//contenedor para el registro
+		
+		JPanel register_container = new JPanel();
+        register_container.setBounds(550, 40, 400, 480);
+		register_container.setOpaque(true);
+		register_container.setBackground(Color.decode("#ffffff"));
+		register_container.setLayout(null);
+		this.add(register_container);
+		
+		JLabel title_register = new JLabel(" REGISTER ", SwingConstants.CENTER);
+        title_register.setBounds(50, 40, 300, 40);
+        title_register.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        register_container.add(title_register);
+
+        JLabel email = new JLabel("EMAIL ADRESS:"); 
+        email.setBounds(50, 130, 300, 20);
+        email.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        email.setIconTextGap(15);
+        register_container.add(email);
+        
+        JLabel password_register = new JLabel("CREATE PASSWORD:");
+        password_register.setBounds(50, 205, 300, 20);
+        password_register.setIconTextGap(15);
+        password_register.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        register_container.add(password_register);
+
+        JPasswordField password_register_text = new JPasswordField();
+        password_register_text.setBounds(50, 230, 300, 35);
+        password_register_text.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(200, 200, 200)),
+            BorderFactory.createEmptyBorder(0, 10, 0, 0)));
+        register_container.add(password_register_text);
+
+        JTextField emailAdress = new JTextField();
+        emailAdress.setBounds(50, 155, 300, 35);
+        emailAdress.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(200, 200, 200)),
+            BorderFactory.createEmptyBorder(0, 10, 0, 0)));
+        register_container.add(emailAdress);
+
+        JCheckBox terminos = new JCheckBox("Acept Terms");
+        terminos.setBounds(50, 275, 120, 20);
+        terminos.setBackground(Color.WHITE);
+        terminos.setFont(new Font("Segoe UI", Font.ITALIC, 11));
+        register_container.add(terminos);
+        
+        final Color colorNaranjaOriginal = Color.decode("#DE6A00");
+        final Color colorNaranjaHover = Color.decode("#FF8C00");
+        
+        JButton cancelar = new JButton("CANCEL");
+        cancelar.setBounds(50, 370, 300, 45);
+        cancelar.setBackground(Color.white);
+        cancelar.setForeground(Color.black);
+        cancelar.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        cancelar.setFocusPainted(false);
+        cancelar.setBorder(null);
+        cancelar.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
+        
+        register_container.add(cancelar);
+        
+        JButton crear = new JButton("CREATE ACCOUNT");
+		crear.setBounds(50, 320, 300, 45);
+		crear.setBackground(colorNaranjaOriginal);
+		crear.setForeground(Color.WHITE);
+		crear.setFont(new Font("Segoe UI", Font.BOLD, 16));
+		crear.setFocusPainted(false);
+		crear.setBorder(null);
+		crear.setCursor(new Cursor(Cursor.HAND_CURSOR)); 
+
+		
+		crear.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	crear.setBackground(colorNaranjaHover);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	crear.setBackground(colorNaranjaOriginal);
+            }
+        });
+		
+        register_container.add(crear);
+        
+		JLabel fondo = new JLabel(new ImageIcon("DiseñoLogin.jpg"));	
+        fondo.setBounds(0, 0, 1000, 600);
+        this.add(fondo);
+		
+        cancelar.addActionListener(e -> {
+			
+			this.router("login");
+		});
+		
+		register_container.repaint();
+		register_container.revalidate();
+	}
+	
+	public void router(String target)
+	{		
+		this.getContentPane().removeAll();
+		
+		if(target.equals("login")) {
+			this.login();
+		}
+		
+		else if(target.equals("registro"))  {
+			this.registro();
+		}
+		
+		this.revalidate();
+		this.repaint();
+		
+	}
 }
