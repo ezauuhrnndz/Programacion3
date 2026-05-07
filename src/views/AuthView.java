@@ -1,5 +1,6 @@
 package views;
-//01/05/26
+
+//06/05/26
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -14,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -83,8 +85,7 @@ public class AuthView {
 		JTextField username = new JTextField();
 		username.setBounds(50, 155, 300, 35);
 		// El compound border es para que el texto no pegue con el borde del cuadro
-		username.setBorder(BorderFactory.createCompoundBorder(
-				BorderFactory.createLineBorder(new Color(200, 200, 200)),
+		username.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200)),
 				BorderFactory.createEmptyBorder(0, 10, 0, 0)));
 		contenedor.add(username);
 
@@ -100,8 +101,7 @@ public class AuthView {
 
 		JPasswordField password = new JPasswordField();
 		password.setBounds(50, 230, 300, 35);
-		password.setBorder(BorderFactory.createCompoundBorder(
-				BorderFactory.createLineBorder(new Color(200, 200, 200)),
+		password.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200)),
 				BorderFactory.createEmptyBorder(0, 10, 0, 0)));
 		contenedor.add(password);
 
@@ -186,7 +186,12 @@ public class AuthView {
 
 				// RESULTADO FINAL
 				if (todoBien) {
-					System.out.println("Registro correcto");
+					boolean exitoso = controlador.iniciarSesion(username_val, password_val);
+					if (!exitoso) {
+						JOptionPane.showMessageDialog(null, "Usuario o contrasena incorrectos.", "Error",
+								JOptionPane.ERROR_MESSAGE);
+					}
+
 				}
 			}
 		});
@@ -224,7 +229,7 @@ public class AuthView {
 		ventanaRegistro.setLocationRelativeTo(null);
 		ventanaRegistro.setLayout(null);
 
-		//contenedor para el registro
+		// contenedor para el registro
 		JPanel register_container = new JPanel();
 		register_container.setBounds(550, 40, 400, 480);
 		register_container.setOpaque(true);
@@ -245,9 +250,9 @@ public class AuthView {
 		JTextField txtUsuario = new JTextField();
 		txtUsuario.setBounds(50, 112, 300, 35);
 		// El compound border es para que el texto no pegue con el borde del cuadro
-		txtUsuario.setBorder(BorderFactory.createCompoundBorder(
-				BorderFactory.createLineBorder(new Color(200, 200, 200)),
-				BorderFactory.createEmptyBorder(0, 10, 0, 0)));
+		txtUsuario
+				.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200)),
+						BorderFactory.createEmptyBorder(0, 10, 0, 0)));
 		register_container.add(txtUsuario);
 
 		JLabel email = new JLabel("EMAIL ADRESS:");
@@ -258,9 +263,9 @@ public class AuthView {
 
 		JTextField emailAdress = new JTextField();
 		emailAdress.setBounds(50, 179, 300, 35);
-		emailAdress.setBorder(BorderFactory.createCompoundBorder(
-				BorderFactory.createLineBorder(new Color(200, 200, 200)),
-				BorderFactory.createEmptyBorder(0, 10, 0, 0)));
+		emailAdress
+				.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200)),
+						BorderFactory.createEmptyBorder(0, 10, 0, 0)));
 		register_container.add(emailAdress);
 
 		JLabel password_register = new JLabel("CREATE PASSWORD:");
@@ -271,9 +276,9 @@ public class AuthView {
 
 		JPasswordField password_register_text = new JPasswordField();
 		password_register_text.setBounds(50, 248, 300, 35);
-		password_register_text.setBorder(BorderFactory.createCompoundBorder(
-				BorderFactory.createLineBorder(new Color(200, 200, 200)),
-				BorderFactory.createEmptyBorder(0, 10, 0, 0)));
+		password_register_text
+				.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(200, 200, 200)),
+						BorderFactory.createEmptyBorder(0, 10, 0, 0)));
 		register_container.add(password_register_text);
 
 		JCheckBox terminos = new JCheckBox("Acept Terms");
@@ -316,7 +321,8 @@ public class AuthView {
 			}
 		});
 
-		// Al crear cuenta se envian los datos al controlador para que los pase al modelo
+		// Al crear cuenta se envian los datos al controlador para que los pase al
+		// modelo
 		crear.addActionListener(e -> {
 			String usuario_val = txtUsuario.getText();
 			String email_val = emailAdress.getText();

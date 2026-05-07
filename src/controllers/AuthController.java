@@ -1,5 +1,6 @@
 package controllers;
-//01/05/26
+
+//06/05/26
 import models.AuthModel;
 import views.AuthView;
 
@@ -23,5 +24,9 @@ public class AuthController {
 
 	public void registrarUsuario(String usuario, String contrasena, String email) {
 		modelo.registro(usuario, contrasena, email);
+	}
+
+	public boolean iniciarSesion(String usuario, String contrasena) {
+		return modelo.login(usuario, contrasena);
 	}
 }
