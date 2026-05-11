@@ -1,10 +1,10 @@
 package models;
+//11/05/26
 
-//06/05/26
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+import java.util.ArrayList;
 import database.Conexion;
 
 public class AuthModel {
@@ -14,7 +14,6 @@ public class AuthModel {
 
 		if (con != null) {
 			try {
-
 				String sql = "INSERT INTO usuarios (username, password, nombre_completo) VALUES (?, ?, ?)";
 				PreparedStatement ps = con.prepareStatement(sql);
 				ps.setString(1, usuario);
@@ -28,29 +27,57 @@ public class AuthModel {
 		}
 	}
 
-	public boolean login(String usuario, String contrasena) {
+	public ArrayList<User> obtenerUsuarios() {
+		ArrayList<User> listaUsuarios = new ArrayList<>();
 		Connection con = Conexion.getConexion();
 
 		if (con != null) {
 			try {
-				String sql = "SELECT * FROM usuarios WHERE username = ? AND password = ?";
+				String sql = "SELECT * FROM usuarios";
 				PreparedStatement ps = con.prepareStatement(sql);
-				ps.setString(1, usuario);
-				ps.setString(2, contrasena);
 				ResultSet rs = ps.executeQuery();
 
-				if (rs.next()) {
-					System.out.println("Login exitoso: bienvenido " + rs.getString("username"));
-					return true;
-				} else {
-					System.out.println("Usuario o contrasena incorrectos");
-					return false;
+				// Recorre cada fila del resultado y crea un objeto User con sus datos
+				while (rs.next()) {
+					int id = rs.getInt("id");
+					String username = rs.getString("username");
+					String nombreCompleto = rs.getString("nombre_completo");
+
+					User user = new User(id, username, nombreCompleto);
+					listaUsuarios.add(user);
 				}
+
 			} catch (Exception e) {
-				System.out.println("Error al hacer login: " + e.getMessage());
-				return false;
+				System.out.println("Error al obtener usuarios: " + e.getMessage());
 			}
 		}
-		return false;
+
+		return listaUsuarios;
+	}
+	
+	public boolean login(String usuario, String contrasena) {
+	    Connection con = Conexion.getConexion();
+
+	    if (con != null) {
+	        try {
+	            String sql = "SELECT * FROM usuarios WHERE username = ? AND password = ?";
+	            PreparedStatement ps = con.prepareStatement(sql);
+	            ps.setString(1, usuario);
+	            ps.setString(2, contrasena);
+	            ResultSet rs = ps.executeQuery();
+
+	            if (rs.next()) {
+	                System.out.println("Login exitoso: bienvenido " + rs.getString("username"));
+	                return true;
+	            } else {
+	                System.out.println("Usuario o contrasena incorrectos");
+	                return false;
+	            }
+	        } catch (Exception e) {
+	            System.out.println("Error al hacer login: " + e.getMessage());
+	            return false;
+	        }
+	    }
+	    return false;
 	}
 }
