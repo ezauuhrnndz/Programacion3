@@ -1,6 +1,6 @@
 package moodleApp;
+//13/05/26
 
-//11/05/26
 import controllers.AuthController;
 
 public class mainMoodleApp {
@@ -12,7 +12,7 @@ public class mainMoodleApp {
 
 		AuthController ac = new AuthController();
 		ac.showLogin();
-	    ac.mostrarUsuarios();
+//	    ac.mostrarUsuarios();
 
 	}
 
